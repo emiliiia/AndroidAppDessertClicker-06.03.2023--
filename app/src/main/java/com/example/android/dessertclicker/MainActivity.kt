@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
     private var revenue = 0
     private var dessertsSold = 0
 
+    private lateinit var dessertTimer: DessertTimer
+
     // Contains all the views
     private lateinit var binding: ActivityMainBinding
 
@@ -72,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.dessertButton.setOnClickListener {
+            dessertTimer = DessertTimer()
             onDessertClicked()
         }
 
@@ -85,8 +88,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        dessertTimer.startTimer()
 
-        Timber.i("onStart Called")
+        Timber.i("onStart called")
     }
 
     override fun onResume() {
@@ -101,6 +105,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
+        dessertTimer.stopTimer()
+
         Timber.i("onStop Called")
     }
 
